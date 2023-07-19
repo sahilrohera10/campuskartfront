@@ -1,0 +1,90 @@
+.profileMainDiv{
+    margin-left: 500px;
+    padding-top: 150px;
+}
+
+.profileHead{
+    margin-left: 200px
+}
+
+.profileContent{
+ display: flex; padding-top: 50px 
+}
+.field{
+     width: 350px
+}
+
+.content{
+    margin-left: 50px
+}
+
+.updateBtn{
+    margin-left: 150px;
+     margin-top: 20px
+}
+
+.deleteBtn{
+    color: red;
+     margin-left: 320px;
+      margin-top: -60px
+
+}
+
+@media only screen and (max-width: 426px) {
+	.profileMainDiv{
+        margin-left: 20px;
+        padding-top: 150px;
+    }
+	.profileHead{
+        margin-left: 160px
+    }
+.field{
+    width: 260px;
+}
+.content{
+    margin-left: 10px;
+}
+.updateBtn{
+    margin-left: 110px;
+     margin-top: 20px
+}
+
+.deleteBtn{
+    color: red;
+     margin-left: 260px;
+      margin-top: -60px
+
+}
+
+
+  }
+
+  
+@media only screen and (max-width: 376px) {
+	.profileMainDiv{
+        margin-left: 15px;
+        padding-top: 150px;
+    }
+	.profileHead{
+        margin-left: 140px
+    }
+.field{
+    width: 230px;
+}
+.content{
+    margin-left: 10px;
+}
+.updateBtn{
+    margin-left: 150px;
+     margin-top: 20px
+}
+
+.deleteBtn{
+    color: red;
+     margin-left: 210px;
+      margin-top: -60px
+
+}
+
+
+  }
