@@ -12,5 +12,5 @@ function App() {
     </>
   );
 }
-//    https://campus-kart-api.ml
+//    https://api.campuskart.co
 export default App;
