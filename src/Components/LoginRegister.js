@@ -15,13 +15,27 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import configData from "../config.json";
+import { GoogleOAuthProvider ,GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+const GOOGLE_CLIENT_ID = "316588223894-26oq94mt63nn6c6jmv5b1ehe7kj90bu9.apps.googleusercontent.com";
 
 // import { MyContext } from "../../UserContext";
 
 export default function LoginRegister() {
-  const navigate = useNavigate();
-  // const [user, SetUserData] = useContext(MyContext);
 
+  const navigate = useNavigate();
+  const responseGoogle = (credentialResponse) => {
+      var decode = jwt_decode(credentialResponse.credential);
+      localStorage.setItem("Login Token",decode.jti);
+      if(credentialResponse.credential){
+        localStorage.setItem("isAuthenticated", true);
+        navigate("/");
+      }
+  };
+  const googleResponseError = ()=>{
+    console.log("Login Failed");
+  }
+  
   const mail = localStorage.getItem("loginMail");
   console.log("mailId =>", mail);
   const pass = localStorage.getItem("loginPassword");
@@ -173,6 +187,7 @@ export default function LoginRegister() {
   const [userData, setUserData] = useState();
 
   const handleSubmiting = async (event) => {
+    
     event.preventDefault();
     const body = {
       Email: email,
@@ -189,8 +204,9 @@ export default function LoginRegister() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-
+  
     try {
+      
       const rep1 = await fetch(`${configData.apiurl}/Login`, requestOptions);
       rep1.json().then((data) => {
         console.log("data =>", data.pass);
@@ -413,6 +429,12 @@ export default function LoginRegister() {
             >
               Login
             </button>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+    <GoogleLogin
+      onSuccess={responseGoogle} 
+      onError={googleResponseError}
+/>
+      </GoogleOAuthProvider>
           </form>
         </div>
         <div className="overlay-container">
