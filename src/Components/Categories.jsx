@@ -24,10 +24,10 @@ const Categories = () => {
           img: electronics,
           name:"Electronics"
         },
-        {
-            img: connect,
-            name:"Connect"
-          }
+        // {
+        //     img: connect,
+        //     name:"Connect"
+        //   }
       ];
   return (
     <div className='categories-body'>

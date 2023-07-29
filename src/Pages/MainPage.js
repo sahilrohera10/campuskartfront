@@ -12,6 +12,7 @@ import Images from "../Components/Images";
 // import FeatureProducts from "../Components/FeatureProducts";
 import ProductsGrid from "./ProductsGrid";
 import Categories from "../Components/Categories";
+import FAQ from "../Components/FAQ";
 
 export default function MainPage() {
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function MainPage() {
         
         <Categories />
         <ProductsGrid />
+        <FAQ/>
       </div>
       
 
