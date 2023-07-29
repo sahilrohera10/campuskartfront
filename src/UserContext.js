@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import configData from "./config.json";
 
 const MyContext = React.createContext([{}, () => {}]);
 
 function UserContext(props) {
   async function loadUserData(email) {
-    let data = await fetch(`https://campus-kart-api.ml/get/user/${email}`, {
+    let data = await fetch(`${configData.apiurl}/get/user/${email}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

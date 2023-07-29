@@ -25,17 +25,10 @@ const routes = [
     element: <Layout />,
     children: [
       { path: "/", element: <MainPage /> },
-      //   { path: "main", element: <MainPage /> },
-
       { path: "shop", element: <ProductGrid /> },
       { path: "forumpage", element: <ForumPage /> },
       { path: "wishlist", element: <Wishlist /> },
       { path: "addProduct", element: <AddProduct /> },
-      // { path: "products", element: <ShowProducts /> },
-      // { path: "product/edit/:id", element: <EditProduct /> },
-      // { path: "product/:id", element: <ProductDetail /> },
-      // { path: "campuseats", element: <Main /> },
-      // { path: "menupage", element: <MenuPage /> },
       { path: "productReview", element: <ProductReview /> },
       { path: "profilePage", element: <ProfilePage /> },
       { path: "myProducts", element: <MyProducts /> },
