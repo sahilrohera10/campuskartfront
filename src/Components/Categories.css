@@ -2,28 +2,30 @@
     display: flex;
     flex-direction: column;
     /* height: 60vh; */
-    margin-top: 3rem;
-    gap: 2rem;
+    margin-top: 6rem;
+    gap: 3rem;
     width: 80vw;
 }
 .c-head{
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     padding-left: 2rem;
 }
 .c-card-section{
     display: flex;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 3rem;
     flex-wrap: wrap;
     
 
 }
+
 .c-card{
     width: 250px;
     /* flex: 1; */
-    height: 40vh;
+    height: 45vh;
     align-items: center;
+    text-align: center;
     border-radius: 2rem;
     overflow: hidden;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -37,6 +39,8 @@
     left: 1rem;
     object-fit: cover;
     transform: scale(1.2);
+    filter: contrast(80%);
+    
 }
 
 .c-card>img:hover{
@@ -44,23 +48,33 @@
     transition: transform .5s;
     transform: scale(1.5);
     
+    
 }
 .c-card>span{
     position: relative;
     top: 1.5rem;
-    left: 30%;
+    
+    text-align: center;
     font-size: 1.5rem;
     font-weight:600;
-    color: rgb(238, 238, 238);
-    /* border: 2px solid red; */
-     z-index: 10000;
+    color: rgb(255, 255, 255);
+     z-index: 1;
      text-shadow: black;
     
 }
 @media only screen and (min-width: 900px){
     .c-card{
-        width: 300px;
+        width: 250px;
         flex: 1;
+        
+    
+    }
+}
+@media only screen and (max-width: 670px){
+    .c-card{
+        width: 70vw;
+        height: 60vh;
+        
         
     
     }
