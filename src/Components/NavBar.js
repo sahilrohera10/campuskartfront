@@ -12,17 +12,14 @@ import LoginModal from "./LoginModal";
 
 export default function NavBar() {
   const auth = localStorage.getItem("isAuthenticated");
-
   const b = "book";
   const s = "stationery";
   const f = "furniture";
   const e = "electronics";
   const navigate = useNavigate();
-
   const [showMenu, setShowMenu] = useState(false);
   const [showMenuSm, setShowMenuSm] = useState(false);
   const [search, setSearch] = useState(false);
-
   const LogOut = () => {
     localStorage.clear();
     navigate("/");
@@ -81,17 +78,15 @@ export default function NavBar() {
             </button>
           </div>
           <div className="lg:w-6/12 flex flex-row items-center space-y-3.5 logoDiv">
+            {/* image of campus kart div  */}
             <div
               aria-label="Luxiwood. Logo"
               role="img"
               className="cursor-pointer"
               style={{ marginRight: "22px" }}
             >
-              {/* <h1>Campus Store</h1> */}
               <img
-                // style={{ marginRight: "300px" }}
                 style={{ width: "200px" }}
-                // style={{ width: "600px", height: "60px" }}
                 src="Campus Kart Logo.png"
                 alt=""
               />
