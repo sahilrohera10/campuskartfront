@@ -15,7 +15,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import configData from "../config.json";
-import { GoogleOAuthProvider ,GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider ,GoogleLogin  , } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 const GOOGLE_CLIENT_ID = "316588223894-26oq94mt63nn6c6jmv5b1ehe7kj90bu9.apps.googleusercontent.com";
 
@@ -31,6 +31,7 @@ export default function LoginRegister() {
         localStorage.setItem("isAuthenticated", true);
         navigate("/");
       }
+      console.log(decode);
   };
   const googleResponseError = ()=>{
     console.log("Login Failed");

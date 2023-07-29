@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import "./ProductGrid.css";
 import { useParams } from "react-router";
 import ReactLoading from "react-loading";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DotLoader } from "react-spinners";
 import configData from "../config.json";
+import { Link } from "react-router-dom";
+import { Padding } from "@mui/icons-material";
 
 // import { Link } from 'react-router-dom'
 
@@ -95,10 +98,8 @@ const ProductsGrid = () => {
   };
 
   return (
-    <div className=" 2xl:container 2xl:mx-auto">
-      <div className=" py-6 lg:px-20 md:px-6 px-4">
-        <div className=" flex justify-between items-center"></div>
-
+    <div className=" 2xl:container 2xl:mx-auto w-screen flex justify-center items-center">
+      <div className=" py-6 lg:px-20 md:px-6 px-4 w-10/12 flex justify-between items-center flex-wrap">
         <br />
         <div className="loader">
           <DotLoader
@@ -108,25 +109,31 @@ const ProductsGrid = () => {
             loading={isLoading}
           />
         </div>
-
         <div
           style={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: "space-between",
             flexWrap: "wrap",
           }}
         >
           {finalData &&
             finalData.map((data) => (
-              <div>
+              
                 <Card
-                  className="shadow-lg m-2 p-3 "
+                id="card-product"
+                  // className="shadow-lg m-2 p-3 "
                   style={{
-                    width: "18rem",
+                    width: "350px",
                     cursor: "pointer",
-                    height: "auto",
-                    borderRadius: "20px",
+                    height: "65vh",
+                    borderRadius: "1.5rem",
                     marginBottom: "100px",
+                    display:"flex",
+                    flexDirection:"column",
+                    // alignItems:"center",
+                    // gap:"1.5rem",
+                    // position:"relative"
+                    
                   }}
                   onClick={() =>
                     navigate("/productReview", {
@@ -142,35 +149,55 @@ const ProductsGrid = () => {
                     })
                   }
                 >
+                  
+                  <div className="main_page-card">
                   <Card.Img
-                    style={{ height: "250px", objectFit: "contain" }}
+                  className="product-card-img"
+                    style={{ height: "37.5vh",width:"100%", objectFit: "cover" }}
                     variant="top"
                     src={`${configData.apiurl}/uploads/${data.imageId}`}
                   />
-                  <Card.Body>
-                    <Card.Title>Title: {data.productName}</Card.Title>
-                    <Card.Title>Price: Rs{data.price}</Card.Title>
-                    <Card.Text>
-                      Description: {data.description.slice(0, 10)}...
-                    </Card.Text>
-                  </Card.Body>
+                  <Card.Img
+                  className="product-card-img2"
+                    style={{ height: "100%", objectFit: "contain",zIndex:"101",position:"relative", }}
+                    variant="top"
+                    src={`${configData.apiurl}/uploads/${data.imageId}`}
+                  />
+                  </div>
+                  <Card.Body className="product-card-body"
+                  style={{display:"flex",
+                   flexDirection:"column",
+                    justifyContent: "space-around",
+                    marginTop:"1rem",
+                    height: "20vh",
+                    width:"88%",
+                    }}>
+                    <Card.Title>{data.productName}</Card.Title>
+                    <Card.Title>Rs.{data.price}</Card.Title>
+                    <Card.Text>{data.description.slice(0, 40)}...</Card.Text>
+                    
 
+                    {/* <Link to="">
+                      <button className="product-card-main">Add to Cart</button>
+                    </Link> */}
+                  </Card.Body>
                   <BsHeart
-                    size={20}
+                    size={30}
+                    className="bsheat"
                     style={{
-                      position: "absolute",
-                      zIndex: "100",
-                      width: "20px",
-                      height: "20px",
-                      top: "90%",
-                      left: "89%",
+                      position: "relative",
+                      zIndex: "1000",
+                      width: "25px",
+                      height: "25px",
+                      top: "-90%",
+                      right: "-88%",
                     }}
                     onClick={() => {
                       handleAdd(data);
                     }}
                   />
                 </Card>
-              </div>
+             
             ))}
         </div>
       </div>
