@@ -5,13 +5,14 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import LoginRegister from "./LoginRegister";
 import { BiRightArrow } from "react-icons/bi";
+import LoginModanewl from "./LoginModal/LoginModanewl";
 
 const style = {
   position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 770,
+  top: "25%",
+  // left: "50%",
+  // transform: "translate(-50%, -50%)",
+  // width: 770,
   //   bgcolor: "background.paper",
   //   border: "2px solid #000",
   boxShadow: 24,
@@ -38,7 +39,7 @@ export default function LoginModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LoginRegister />
+          <LoginModanewl/>
         </Box>
       </Modal>
     </div>
