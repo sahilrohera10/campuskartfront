@@ -50,4 +50,4 @@ const LoginModanewl = () => {
   )
 }
 
-export default LoginModanewl
+export default LoginModanewl;
