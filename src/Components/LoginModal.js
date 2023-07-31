@@ -25,11 +25,11 @@ export default function LoginModal() {
       body: JSON.stringify(body),
     };
     try {
-      const rep1 = await fetch("http://localhost:4002/Register", requestOptions);
+      const rep1 = await fetch(`${configData.apiurl}/Register`, requestOptions);
       const responseJson = await rep1.json();
       if (rep1.status === 409) {
         localStorage.setItem("User Id" , responseJson.id);
-
+    
       }
       if (rep1.status === 200) {
         localStorage.setItem("User Id" , responseJson.id);

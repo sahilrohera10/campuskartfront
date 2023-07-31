@@ -1,6 +1,5 @@
 import {React ,useState} from 'react'
 import './LoginModal.css';
-import googlelogo from '../../Images/googlelogonew.png'
 import { useNavigate } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
@@ -45,7 +44,7 @@ const LoginModanewl = () => {
   });
   return (
     <div className='Login_modal'>
-      <span className='modal_head'>Sign in with&nbsp;<img style={{height:"53px",width:"135px"}} src={googlelogo} alt="" /></span>
+      {/* <span className='modal_head'>Sign in with&nbsp;<img style={{height:"53px",width:"135px"}} src={googlelogo} alt="" /></span> */}
       <div className="link2"><button className='m-button' onClick={login} >Sign in</button></div>
     </div>
   )
