@@ -54,6 +54,7 @@ const ProductsGrid = () => {
     }
   }, []);
   const id = localStorage.getItem("id");
+  // console.log("id=>", id);
   const auth = localStorage.getItem("isAuthenticated");
   const handleAdd = async (addData) => {
     const body = {
