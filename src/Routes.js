@@ -29,7 +29,7 @@ const routes = [
       { path: "forumpage", element: <ForumPage /> },
       { path: "wishlist", element: <Wishlist /> },
       { path: "addProduct", element: <AddProduct /> },
-      { path: "productReview", element: <ProductReview /> },
+      { path: "productReview/:pid", element: <ProductReview /> },
       { path: "profilePage", element: <ProfilePage /> },
       { path: "myProducts", element: <MyProducts /> },
       { path: ":Category", element: <CategoryProductGrid /> },
