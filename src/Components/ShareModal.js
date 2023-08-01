@@ -34,7 +34,8 @@ export default function ShareModal() {
     }, 3000);
   }, [iscopy]);
   const { pid } = useParams();
-  const link = `https://campus-kart.vercel.app/productReview/${pid}`;
+  const newid = encodeURIComponent(pid);
+  const link = `https://campus-kart.vercel.app/productReview/${newid}`;
   const [val, setVal] = React.useState(link);
 
   return (
