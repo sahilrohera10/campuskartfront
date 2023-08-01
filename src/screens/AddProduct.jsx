@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
+import configData from '../config.json'
 const AddProduct = () => {
   useEffect(() => {
     // window.location.reload();
     window.scrollTo(0, 0);
-  }, []);
+  }, []); 
   let id = localStorage.getItem("id");
-  let college = localStorage.getItem("collegeName");
+  let college = "Mait";
 
   console.log("id=>", id);
 
@@ -53,7 +54,7 @@ const AddProduct = () => {
 
     if (auth) {
       const resp = await axios.post(
-        "https://campus-kart-api.ml/product/upload",
+        `${configData.apiurl}/product/upload`,
         formData
       );
       console.log("resp=>", resp);
