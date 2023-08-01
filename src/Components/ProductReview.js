@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import configData from "../config.json";
 import Skeleton from "@mui/material/Skeleton";
+import { AES, enc } from "crypto-js";
 
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { useLocation } from "react-router-dom";
 import { useParams } from "react-router";
+import { FaShare } from "react-icons/fa";
+import ShareModal from "./ShareModal";
 
 /* Install pure-react-carousel using -> npm i pure-react-carousel */
 
@@ -20,13 +14,17 @@ export default function ProductReview() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   // const location = useLocation();
-  const { pid } = useParams();
+  var { pid } = useParams();
   console.log("id=>", pid);
+  const bytes = AES.decrypt(pid, "campuskart");
+  const id = bytes.toString(enc.Utf8);
+  console.log("pid=>", id);
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetch(`${configData.apiurl}/product/get?pid=${pid}`)
+    fetch(`${configData.apiurl}/product/get?pid=${id}`)
       .then((resp) => resp.json())
       .then((resp) => {
         console.log("data=>", resp.data[0]);
@@ -167,9 +165,21 @@ export default function ProductReview() {
           >
             <div className="flex justify-center items-center lg:flex-row flex-col gap-8">
               <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
-                <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 mt-4">
-                  {data.productName}
-                </h2>
+                <div style={{ display: "flex" }}>
+                  <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 mt-4">
+                    {data.productName}
+                  </h2>
+
+                  {/* <FaShare
+                      size={25}
+                      style={{
+                        marginTop: "35px",
+                        marginLeft: "70px",
+                        cursor: "pointer",
+                      }}
+                    /> */}
+                  <ShareModal />
+                </div>
 
                 <div className=" flex flex-row justify-between  mt-5">
                   <div className=" flex flex-row space-x-3">
@@ -254,16 +264,10 @@ export default function ProductReview() {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <button
-                    // style={{ width: "15vw" }}
-                    className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6"
-                  >
+                  <button className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6">
                     Chat Now
                   </button>
-                  <button
-                    // style={{ width: "15vw" }}
-                    className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48  py-5 lg:mt-12 mt-6"
-                  >
+                  <button className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48  py-5 lg:mt-12 mt-6">
                     Add To Wishlist
                   </button>
                 </div>
@@ -315,7 +319,7 @@ export default function ProductReview() {
             paddingTop: "150px",
             width: "100vw",
             height: "80vh",
-            // marginLeft: "100px",
+
             justifyContent: "space-evenly",
           }}
         >
@@ -330,6 +334,4 @@ export default function ProductReview() {
       )}
     </>
   );
-  // } else alert("login First to see the details");
-  // return <Navigate to="/" />;
 }

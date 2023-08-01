@@ -1,21 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import "./ProductGrid.css";
-import { useParams } from "react-router";
-import ReactLoading from "react-loading";
 import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { BsHeart } from "react-icons/bs";
-import DropdownSelect from "../Components/DropdownSelect";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { DotLoader } from "react-spinners";
 import configData from "../config.json";
 import { Link } from "react-router-dom";
-import { Padding } from "@mui/icons-material";
+import { AES } from "crypto-js";
 
 // import { Link } from 'react-router-dom'
 
@@ -26,6 +17,13 @@ const ProductsGrid = () => {
 
   const handleChange = (event) => {
     setCategory(event.target.value);
+  };
+
+  const key = "campuskart";
+  const encryptIt = (id) => {
+    const d = AES.encrypt(id, key).toString();
+    const newd = encodeURIComponent(d);
+    return newd;
   };
 
   const navigate = useNavigate();
@@ -54,7 +52,7 @@ const ProductsGrid = () => {
     }
   }, []);
   const id = localStorage.getItem("id");
-  // console.log("id=>", id);
+
   const auth = localStorage.getItem("isAuthenticated");
   const handleAdd = async (addData) => {
     const body = {
@@ -119,81 +117,77 @@ const ProductsGrid = () => {
         >
           {finalData &&
             finalData.map((data) => (
-              <Card
-                id="card-product"
-                // className="shadow-lg m-2 p-3 "
-                style={{
-                  width: "350px",
-                  cursor: "pointer",
-                  height: "65vh",
-                  borderRadius: "1.5rem",
-                  marginBottom: "100px",
-                  display: "flex",
-                  flexDirection: "column",
-                  // alignItems:"center",
-                  // gap:"1.5rem",
-                  // position:"relative"
-                }}
-                onClick={() => navigate(`/productReview/${data._id}`)}
+              <Link
+                style={{ color: "black", textDecoration: "none" }}
+                to={`/productReview/${encryptIt(data._id)}`}
               >
-                <div className="main_page-card">
-                  <Card.Img
-                    className="product-card-img"
-                    style={{
-                      height: "37.5vh",
-                      width: "100%",
-                      objectFit: "cover",
-                    }}
-                    variant="top"
-                    src={`${configData.apiurl}/uploads/${data.imageId}`}
-                  />
-                  <Card.Img
-                    className="product-card-img2"
-                    style={{
-                      height: "100%",
-                      objectFit: "contain",
-                      zIndex: "101",
-                      position: "relative",
-                    }}
-                    variant="top"
-                    src={`${configData.apiurl}/uploads/${data.imageId}`}
-                  />
-                </div>
-                <Card.Body
-                  className="product-card-body"
+                <Card
+                  id="card-product"
                   style={{
+                    width: "350px",
+                    cursor: "pointer",
+                    height: "65vh",
+                    borderRadius: "1.5rem",
+                    marginBottom: "100px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-around",
-                    marginTop: "1rem",
-                    height: "20vh",
-                    width: "88%",
                   }}
                 >
-                  <Card.Title>{data.productName}</Card.Title>
-                  <Card.Title>Rs.{data.price}</Card.Title>
-                  <Card.Text>{data.description.slice(0, 40)}...</Card.Text>
-
-                  {/* <Link to="">
-                      <button className="product-card-main">Add to Cart</button>
-                    </Link> */}
-                </Card.Body>
-                <BsHeart
-                  size={30}
-                  className="bsheat"
-                  style={{
-                    position: "relative",
-                    zIndex: "1000",
-                    width: "25px",
-                    height: "25px",
-                    top: "-90%",
-                    right: "-88%",
-                  }}
-                  onClick={() => {
-                    handleAdd(data);
-                  }}
-                />
-              </Card>
+                  <div className="main_page-card">
+                    <Card.Img
+                      className="product-card-img"
+                      style={{
+                        height: "37.5vh",
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
+                      variant="top"
+                      src={`${configData.apiurl}/uploads/${data.imageId}`}
+                    />
+                    <Card.Img
+                      className="product-card-img2"
+                      style={{
+                        height: "100%",
+                        objectFit: "contain",
+                        zIndex: "101",
+                        position: "relative",
+                      }}
+                      variant="top"
+                      src={`${configData.apiurl}/uploads/${data.imageId}`}
+                    />
+                  </div>
+                  <Card.Body
+                    className="product-card-body"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-around",
+                      marginTop: "1rem",
+                      height: "20vh",
+                      width: "88%",
+                    }}
+                  >
+                    <Card.Title>{data.productName}</Card.Title>
+                    <Card.Title>Rs.{data.price}</Card.Title>
+                    <Card.Text>{data.description.slice(0, 40)}...</Card.Text>
+                  </Card.Body>
+                  <BsHeart
+                    size={30}
+                    className="bsheat"
+                    style={{
+                      position: "relative",
+                      zIndex: "1000",
+                      width: "25px",
+                      height: "25px",
+                      top: "-90%",
+                      right: "-88%",
+                    }}
+                    onClick={() => {
+                      handleAdd(data);
+                    }}
+                  />
+                </Card>
+              </Link>
             ))}
         </div>
       </div>
