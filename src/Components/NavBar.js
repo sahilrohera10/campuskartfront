@@ -28,6 +28,7 @@ export default function NavBar() {
   return (
     <div
       style={{
+        top:0,
         position: "fixed",
         zIndex: "1000",
         backgroundColor: "white",
