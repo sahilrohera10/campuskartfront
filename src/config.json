@@ -2,7 +2,10 @@
     "apiurl" : "https://api.campuskart.co",
  "userinfoEndpoint" :"https://www.googleapis.com/oauth2/v3/userinfo",
  "GOOGLE_CLIENT_ID" :
-  "316588223894-26oq94mt63nn6c6jmv5b1ehe7kj90bu9.apps.googleusercontent.com"
-   
+  "316588223894-26oq94mt63nn6c6jmv5b1ehe7kj90bu9.apps.googleusercontent.com", 
+ "rollbarConfig":{
+    "accessToken": "7538f75d56dd4dc692d4027a3499cc05",
+    "environment": "production"
+  }
 }
 

@@ -4,16 +4,22 @@ import routes from "./Routes";
 import { UserContext } from "./UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import configData from './config.json'
+import { Provider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
+
 function App() {
   const routing = useRoutes(routes);
 
   return (
     <>
+    <Provider config={configData.rollbarConfig}>
+      <ErrorBoundary>
       <UserContext>
         <GoogleOAuthProvider clientId={configData.GOOGLE_CLIENT_ID}>
           {routing}
         </GoogleOAuthProvider>
       </UserContext>
+      </ErrorBoundary>
+    </Provider>
     </>
   );
 }
