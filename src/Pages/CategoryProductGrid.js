@@ -54,12 +54,6 @@ const ProductsGrid = () => {
     const body = {
       customerId: id,
       productId: addData._id,
-      productName: addData.productName,
-      description: addData.description,
-      price: addData.price,
-      imgId: addData.imageId,
-      category: addData.category,
-      contactNumber: addData.contactNumber,
     };
     console.log("data=> ", body);
     const requestOptions = {
