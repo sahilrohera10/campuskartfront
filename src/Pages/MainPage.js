@@ -34,7 +34,7 @@ export default function MainPage() {
         
         <Categories />
         <ProductsGrid />
-        <FAQ/>
+        {/* <FAQ/> */}
       </div>
       
 
