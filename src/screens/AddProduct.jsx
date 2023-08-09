@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
+import configData from "../config.json";
 const AddProduct = () => {
   useEffect(() => {
     // window.location.reload();
@@ -53,7 +54,7 @@ const AddProduct = () => {
 
     if (auth) {
       const resp = await axios.post(
-        "https://campus-kart-api.ml/product/upload",
+        `${configData.apiurl}/product/upload`,
         formData
       );
       console.log("resp=>", resp);
