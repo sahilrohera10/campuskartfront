@@ -47,9 +47,9 @@ export default function NavBar() {
   return (
     <div
       style={{
-        top:0,
+        top: 0,
         position: "fixed",
-        zIndex: "1000",
+        zIndex: "1500",
         backgroundColor: "white",
         width: "100%",
         height: "90px",

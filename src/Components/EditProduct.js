@@ -89,8 +89,8 @@ export default function EditProduct({ data }) {
     <div
       style={{
         position: "absolute",
-        marginTop: "-50px",
-        marginLeft: "10px",
+        marginTop: "-60px",
+        marginLeft: "25px",
         zIndex: "100",
       }}
     >

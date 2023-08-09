@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import configData from '../config.json'
+=======
+import configData from "../config.json";
+>>>>>>> 71255fd8ace99338357fc2b60e3ad6acc720b012
 const AddProduct = () => {
   useEffect(() => {
     // window.location.reload();

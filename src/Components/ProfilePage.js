@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,10 +14,13 @@ export default function ProfilePage() {
   // const email = localStorage.getItem("email");
   // const college = localStorage.getItem("collegeName");
   const navigate = useNavigate();
-  const [userDetails,setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState();
+  const [collegeName, setCollegeName] = useState();
+
   const id = localStorage.getItem("id");
   // console.log(id)
   useEffect(() => {
+<<<<<<< HEAD
     console.log(id)
     
     try{
@@ -30,13 +33,49 @@ export default function ProfilePage() {
         localStorage.setItem("profileImage",resp.data.profileImage);
         setUserDetails(resp.data);
       })
+=======
+    console.log(id);
+>>>>>>> 71255fd8ace99338357fc2b60e3ad6acc720b012
 
-    }
-    catch(err){
+    try {
+      fetch(`${configData.apiurl}/get/user/${id}`)
+        .then((resp) => resp.json())
+        .then((resp) => {
+          // console.log(resp.data.email)
+          console.log("data=>", resp.data);
+          setUserDetails(resp.data);
+        });
+    } catch (err) {
       console.error(err);
     }
-    
-  },[])
+  }, []);
+
+  const handleCollegeName = async (e) => {
+    console.log(e.target.value);
+    setCollegeName(e.target.value);
+  };
+  const updateCollegeName = async () => {
+    const body = {
+      id: id,
+      collegeName: collegeName,
+    };
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+    try {
+      const resp = await fetch(
+        `${configData.apiurl}/profile/update`,
+        requestOptions
+      );
+      if (resp.status === 200) {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleDelete = async () => {
     const id = localStorage.getItem("id");
     try {
@@ -93,38 +132,56 @@ export default function ProfilePage() {
 
   return (
     <>
-    {userDetails && <div className="profileContainer">
-        <div>
-          <h1>My Profile</h1>
-          <img src = {`${userDetails.profileImage}`} />
-          <Button variant="contained" onClick={handleUpdate}>Edit Profile</Button>
+      {userDetails && (
+        <div className="profileContainer">
+          <div>
+            <h1>My Profile</h1>
+            <img src={`${userDetails.profileImage}`} />
+            {/* <Button variant="contained" onClick={handleUpdate}>Edit Profile</Button> */}
+          </div>
+          <div>
+            <div>
+              <h4>Full Name</h4>
+              <p>{userDetails.name}</p>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>{userDetails.email}</p>
+            </div>
+            <div>
+              <h4>College</h4>
+              <p>{userDetails.collegeName}</p>
+              {!userDetails.collegeName && (
+                <>
+                  <TextField
+                    style={{ height: "20px" }}
+                    id="filled-basic"
+                    label="Filled"
+                    variant="filled"
+                    onChange={handleCollegeName}
+                  />
+                  <Button
+                    style={{ margin: "10px" }}
+                    variant="contained"
+                    onClick={updateCollegeName}
+                  >
+                    Add College
+                  </Button>
+                </>
+              )}
+            </div>
+            <div>
+              <br />
 
+              <Button variant="contained" onClick={handleDelete}>
+                Delete My Account
+              </Button>
+            </div>
+          </div>
         </div>
-        <div>
-          <div>
-            <h4>Full Name</h4>
-            <p>{userDetails.name}</p>
-          </div>
-          <div>
-            <h4>Email</h4>
-            <p>{userDetails.email}</p>
-          </div>
-          <div>
-            <h4>College</h4>
+      )}
 
-          </div>
-          <div>
-            
-            <br />  
-            
-            <Button variant="contained" onClick={handleDelete}>Delete My Account</Button>
-          </div>
-
-        </div>
-      </div>}
-      
-      <MyProducts/>
-
-    </> 
+      <MyProducts />
+    </>
   );
 }
