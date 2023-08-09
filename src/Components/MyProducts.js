@@ -309,7 +309,7 @@ const MyProducts = () => {
                       left: "70%",
                       zIndex: "1000",
                     }}
-                    checked={data.SoldStatus == "true" ? true : false}
+                    checked={data.SoldStatus}
                     onChange={(event) => handleChange(event, data._id)}
                     inputProps={{ "aria-label": "controlled" }}
                   />
