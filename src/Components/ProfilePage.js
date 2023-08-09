@@ -7,6 +7,7 @@ import configData from "../config.json";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 import MyProducts from "./MyProducts";
+import { data } from "autoprefixer";
 
 export default function ProfilePage() {
   // const name = localStorage.getItem("name");
@@ -25,6 +26,8 @@ export default function ProfilePage() {
       .then((resp)=> {
         // console.log(resp.data.email)
         console.log("data=>",resp.data);
+        console.log(resp.data.profileImage);
+        localStorage.setItem("profileImage",resp.data.profileImage);
         setUserDetails(resp.data);
       })
 
