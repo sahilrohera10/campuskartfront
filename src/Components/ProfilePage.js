@@ -20,22 +20,7 @@ export default function ProfilePage() {
   const id = localStorage.getItem("id");
   // console.log(id)
   useEffect(() => {
-<<<<<<< HEAD
-    console.log(id)
-    
-    try{
-      fetch(`${configData.apiurl}/get/user/${id}`)
-      .then((resp) => resp.json())
-      .then((resp)=> {
-        // console.log(resp.data.email)
-        console.log("data=>",resp.data);
-        console.log(resp.data.profileImage);
-        localStorage.setItem("profileImage",resp.data.profileImage);
-        setUserDetails(resp.data);
-      })
-=======
     console.log(id);
->>>>>>> 71255fd8ace99338357fc2b60e3ad6acc720b012
 
     try {
       fetch(`${configData.apiurl}/get/user/${id}`)
