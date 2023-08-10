@@ -7,6 +7,7 @@ import configData from "../config.json";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 import MyProducts from "./MyProducts";
+import { data } from "autoprefixer";
 
 export default function ProfilePage() {
   // const name = localStorage.getItem("name");
