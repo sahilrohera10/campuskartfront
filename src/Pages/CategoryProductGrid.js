@@ -112,73 +112,90 @@ const ProductsGrid = () => {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: "center",
+            // flexDirection:"column",
             flexWrap: "wrap",
+            gap: "2rem",
           }}
         >
+          {/* <ReactCardSlider slides={slides}/> */}
+
           {finalData &&
             finalData.map((data) => (
-              <div>
-                <Link
-                  style={{ color: "black", textDecoration: "none" }}
-                  to={`/productReview/${encryptIt(data._id)}`}
-                >
+              <Link
+                style={{ color: "black", textDecoration: "none" }}
+                to={`/productReview/${encryptIt(data._id)}`}
+              >
+                <div>
                   <Card
-                    className="shadow-lg m-2 p-3 rounded"
+                    id="card-product"
+                    // className="shadow-lg m-2 p-3 "
                     style={{
-                      width: "18rem",
+                      width: "275px",
                       cursor: "pointer",
-                      height: "auto",
+                      height: "55vh",
+                      borderRadius: "1.5rem",
+                      marginBottom: "50px",
+                      display: "flex",
+                      flexDirection: "column",
                     }}
-                    // onClick={() =>
-                    //   navigate("/productReview", {
-                    //     state: {
-                    //       data: {
-                    //         imgId: data.imageId,
-                    //         productName: data.productName,
-                    //         price: data.price,
-                    //         description: data.description,
-                    //         contactNumber: data.contactNumber,
-                    //       },
-                    //     },
-                    //   })
-                    // }
                   >
-                    <Card.Img
-                      style={{ height: "250px", objectFit: "contain" }}
-                      variant="top"
-                      src={`${configData.apiurl}/uploads/${data.imageId}`}
-                    />
-                    <Card.Body>
-                      <Card.Title>Title: {data.productName}</Card.Title>
-                      <Card.Title>Price: Rs{data.price}</Card.Title>
-                      <Card.Text>
-                        Description: {data.description.slice(0, 10)}...
-                      </Card.Text>
-
-                      {/* <Link to={`product/${product.id}`}> */}
-                      {/* <button>Detail</button> */}
-                      {/* </Link> */}
-                    </Card.Body>
-
-                    <BsHeart
-                      size={20}
+                    <div className="main_page-card">
+                      <Card.Img
+                        className="product-card-img"
+                        style={{
+                          height: "30vh",
+                          width: "100%",
+                          objectFit: "cover",
+                        }}
+                        variant="top"
+                        src={`${configData.apiurl}/uploads/${data.imageId}`}
+                      />
+                      <Card.Img
+                        className="product-card-img2"
+                        style={{
+                          height: "100%",
+                          objectFit: "contain",
+                          zIndex: "101",
+                          position: "relative",
+                        }}
+                        variant="top"
+                        src={`${configData.apiurl}/uploads/${data.imageId}`}
+                      />
+                    </div>
+                    <Card.Body
+                      className="product-card-body"
                       style={{
-                        position: "absolute",
-                        zIndex: "100",
-                        width: "20px",
-                        height: "20px",
-                        top: "90%",
-                        left: "89%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-around",
+                        // marginTop: "1rem",
+                        height: "20vh",
+                        width: "100%",
                       }}
-                      // style={{ marginLeft: "230px", marginTop: "230px" }}
+                    >
+                      <Card.Title>{data.productName}</Card.Title>
+                      <Card.Title>Rs.{data.price}</Card.Title>
+                      <Card.Text>{data.description.slice(0, 40)}...</Card.Text>
+                    </Card.Body>
+                    <BsHeart
+                      size={30}
+                      className="bsheat"
+                      style={{
+                        position: "relative",
+                        zIndex: "1000",
+                        width: "25px",
+                        height: "25px",
+                        top: "-90%",
+                        right: "-88%",
+                      }}
                       onClick={() => {
                         handleAdd(data);
                       }}
                     />
                   </Card>
-                </Link>
-              </div>
+                </div>
+              </Link>
             ))}
         </div>
       </div>
