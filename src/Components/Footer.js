@@ -56,10 +56,13 @@ const Footer = () => {
                 id="link_des"
                 className="mx-auto mb-4"
               >
-                <h6 className="text-uppercase fw-bold mb-4">
+                {/* <h6 className="text-uppercase fw-bold mb-4">
                   <MDBIcon color="secondary" icon="gem" className="me-3" />
                   Campus Kart
-                </h6>
+                </h6> */}
+                {/* <div>
+                </div> */}
+                <img src="Campus_Kart_Logo_no_bg.png" alt="" style={{height:"70px" , width:"200px"}} />
                 <p>
                   CAMPUS KART is an innovative and student-centered platform
                   designed to provide convenience and ease to college students
@@ -85,12 +88,12 @@ const Footer = () => {
                   </a>
                 </p>
                 <p>
-                  <a href={`books`} className="text-reset">
+                  <a href={`furniture`} className="text-reset">
                     Furniture
                   </a>
                 </p>
                 <p>
-                  <a href={`books`} className="text-reset">
+                  <a href={`electronics`} className="text-reset">
                     Electronics
                   </a>
                 </p>
