@@ -1,19 +1,9 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import LoginRegister from "./LoginRegister";
-import { BiRightArrow } from "react-icons/bi";
-import LoginModanewl from "./LoginModal/LoginModanewl";
+import "./LoginModal.css";
 import google from ".././Images/google.png";
 import { useNavigate } from "react-router-dom";
-import {
-  GoogleOAuthProvider,
-  useGoogleLogin,
-  GoogleLogin,
-} from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+
 import configData from "../config.json";
 export default function LoginModal() {
   const navigate = useNavigate();
@@ -74,22 +64,9 @@ export default function LoginModal() {
 
   return (
     <div>
-      <button
-        onClick={login}
-        style={{
-          backgroundColor: "white",
-          border: "1px solid black",
-          width: "170px",
-          marginRight: "20px",
-          color: "black",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          display: "flex",
-          height: "60px",
-        }}
-      >
-        <img src={google} alt="" style={{ height: "50px", width: "63px" }} />{" "}
-        <p style={{ alignSelf: "end" }}>Sign In</p>
+      <button onClick={login} className="login-btn">
+        <img className="lgimg" src={google} alt="img" />{" "}
+        <p className="lgtxt">Sign In</p>
       </button>
     </div>
   );

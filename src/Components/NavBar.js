@@ -1,12 +1,13 @@
-import React, { useState ,useEffect } from "react";
-import configData from '../config.json'
+import React, { useState, useEffect } from "react";
+import configData from "../config.json";
 // import logo from "../CampusLogo.png";
 import { motion } from "framer-motion";
 // import { Link } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 import LoginModal from "./LoginModal";
+import "./Navbar.css";
 
 export default function NavBar() {
   const auth = localStorage.getItem("isAuthenticated");
@@ -18,31 +19,27 @@ export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
   const [showMenuSm, setShowMenuSm] = useState(false);
   const [search, setSearch] = useState(false);
-  const [profileImage ,setprofileImage] = useState();
+  const [profileImage, setprofileImage] = useState();
   const LogOut = () => {
     localStorage.clear();
     navigate("/");
   };
   const id = localStorage.getItem("id");
   useEffect(() => {
-   if(localStorage.getItem("profileImage")){
-    setprofileImage(localStorage.getItem('profileImage'));
-   }else{
-
-     try{
-       fetch(`${configData.apiurl}/get/user/${id}`)
-       .then((resp) => resp.json())
-       .then((resp)=> {
-         setprofileImage(resp.data.profileImage);
-       })
- 
-     }
-     catch(err){
-       console.error(err);
-     }
-   }    
-    
-  },[])
+    if (localStorage.getItem("profileImage")) {
+      setprofileImage(localStorage.getItem("profileImage"));
+    } else {
+      try {
+        fetch(`${configData.apiurl}/get/user/${id}`)
+          .then((resp) => resp.json())
+          .then((resp) => {
+            setprofileImage(resp.data.profileImage);
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }, []);
 
   return (
     <div
@@ -51,12 +48,12 @@ export default function NavBar() {
         position: "fixed",
         zIndex: "1500",
         backgroundColor: "white",
-        width: "100%",
+        width: "100vw",
         height: "90px",
       }}
       className="dark:bg-gray-900"
     >
-      <div className="2xl:container 2xl:mx-auto md:py-5 lg:px-20 md:px-6 p-4">
+      <div className="2xl:container 2xl:mx-auto md:py-5 lg:px-20 md:px-6 p-4  navsizing">
         <div className="flex items-center justify-between">
           <div className="lg:w-3/12">
             <button
@@ -99,19 +96,18 @@ export default function NavBar() {
           </div>
           <div className="lg:w-6/12 flex flex-row items-center space-y-3.5 logoDiv">
             {/* image of campus kart div  */}
-            <Link to="/" >
-            <div
-              aria-label="Luxiwood. Logo"
-              role="img"
-              className="cursor-pointer"
-              style={{ marginRight: "22px" }}
-            >
-              <img
-                style={{ width: "200px" }}
-                src="Campus Kart Logo.png"
-                alt=""
-              />
-            </div>
+            <Link to="/">
+              <div
+                aria-label="Luxiwood. Logo"
+                role="img"
+                className="cursor-pointer"
+              >
+                <img
+                  style={{ width: "190px" }}
+                  src="Campus Kart Logo.png"
+                  alt=""
+                />
+              </div>
             </Link>
             <div
               style={{
@@ -215,7 +211,7 @@ export default function NavBar() {
             </div>
           </div>
           {auth ? (
-            <div style={{ display: "flex" }}>
+            <div className="logedin">
               <Link
                 style={{ textDecoration: "none" }}
                 to="wishlist"
@@ -263,10 +259,15 @@ export default function NavBar() {
                         cursor: "pointer",
                       }}
                     /> */}
-                    <Avatar sx={{ width: 30, height: 30 }} style={{
+                    <Avatar
+                      sx={{ width: 30, height: 30 }}
+                      style={{
                         marginRight: "25px",
                         cursor: "pointer",
-                      }} alt="Remy Sharp" src={profileImage} />
+                      }}
+                      alt="Remy Sharp"
+                      src={profileImage}
+                    />
                   </button>
                   <div
                     style={{ minWidth: "100px", right: "0" }}
@@ -294,7 +295,7 @@ export default function NavBar() {
         <div id="md-menu" className={`${showMenu ? "md:block" : "hide"} "" `}>
           <div
             style={{
-              height: "310px",
+              height: "270px",
               width: "200px",
               background: "white",
               paddingLeft: "10px",
@@ -372,7 +373,7 @@ export default function NavBar() {
                 <p>wishlist</p>
               </Link>
             ) : (
-              <LoginModal />
+              ""
             )}
           </div>
         </div>
