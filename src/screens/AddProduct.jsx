@@ -4,50 +4,46 @@ import { Container, Form } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 import configData from "../config.json";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 const AddProduct = () => {
   useEffect(() => {
-    // window.location.reload();
     window.scrollTo(0, 0);
   }, []);
   let id = localStorage.getItem("id");
   let college = localStorage.getItem("collegeName");
-
+  
   console.log("id=>", id);
-
+  
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [contact, setContact] = useState();
-  // const [sellerId, setSellerId] = useState(id);
-
+  
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
-  // const [published, setPublished] = useState(true);
+  const [category, setCategory] = React.useState('');
+
+
   const [image, setImage] = useState("");
-  // const [collegeName, setCollegeName] = useState(college);
 
   const addProductHandler = async (e) => {
     e.preventDefault();
 
-    // const data = {
-    //     title: title,
-    //     price: price,
-    //     description: description,
-    //     published: published
-    // }
+ 
 
     const formData = new FormData();
-
+    console.log(category);
     formData.append("image", image);
     formData.append("productName", title);
     formData.append("price", price);
     formData.append("description", description);
     formData.append("category", category);
-    formData.append("contactNumber", contact);
     formData.append("sellerId", id);
     formData.append("collegeName", college);
 
-    // formData.append("published", published);
 
     console.log("image data => ", image);
     const auth = localStorage.getItem("isAuthenticated");
@@ -131,30 +127,24 @@ const AddProduct = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="title">
-            <Form.Label style={{ fontSize: "20px", marginRight: "90px" }}>
-              Category
-            </Form.Label>
-            <Form.Control
-              style={{ border: "2px solid black", borderRadius: "10px" }}
+         
+          <FormControl sx={{ m: 0.8, minWidth: 1300 ,borderBlockColor:"black" }}>
+            <Select
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              type="text"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="title">
-            <Form.Label style={{ fontSize: "20px", marginRight: "90px" }}>
-              Contact Number
-            </Form.Label>
-            <Form.Control
-              style={{ border: "2px solid black", borderRadius: "10px" }}
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              type="text"
-            />
-          </Form.Group>
-
+              onChange={(e)=>{setCategory(e.target.value)}}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="">
+                <em>Category</em>
+              </MenuItem>
+              <MenuItem value={"books"}>books</MenuItem>
+              <MenuItem value={"stationery"}>stationery</MenuItem>
+              <MenuItem value={"electronics"}>electronics</MenuItem>
+              <MenuItem value={"furniture"}>furniture</MenuItem>
+            </Select>
+            <FormHelperText>Choose a category regarding your product</FormHelperText>
+          </FormControl>
           <Button
             variant="contained"
             type="submit"
