@@ -16,6 +16,15 @@
   z-index: 1000;
   
 }
+#scroller1{
+  overflow: hidden;
+  background-color: rgb(244, 243, 243);
+  height: 70vh;
+  /* height: 100%; */
+  gap: 2rem;
+  z-index: 1000;
+  
+}
 .main_page-card {
   height: 30vh;
 }

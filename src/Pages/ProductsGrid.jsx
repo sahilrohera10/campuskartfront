@@ -36,6 +36,7 @@ const ProductsGrid = () => {
 
   const [finalData, setFinalData] = useState([]);
 
+  const [newlyadded, setnewlyadded] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -51,6 +52,21 @@ const ProductsGrid = () => {
         .then((resp) => {
           console.log("data=>", resp);
           setFinalData(resp.data);
+          setIsLoading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  useLayoutEffect(() => {
+    console.log("in fetcher");
+    setIsLoading(true);
+    try {
+      fetch(`${configData.apiurl}/product/byFeature?newly_added=true`)
+        .then((resp) => resp.json())
+        .then((resp) => {
+          console.log("data=>", resp);
+          setnewlyadded(resp.data);
           setIsLoading(false);
         });
     } catch (error) {
@@ -132,6 +148,110 @@ const ProductsGrid = () => {
     >
       <span style={{ fontSize: "2.5rem", fontWeight: "bold" }}>
         Newly Added Products
+      </span>
+      <div
+        id="scroller1"
+        className=" py-6 lg:px-20 md:px-6 px-4 w-10/12  justify-center items-center flex-wrap"
+      >
+        <br />
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            // flexDirection:"column",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
+          {/* <ReactCardSlider slides={slides}/> */}
+
+          {newlyadded &&
+            newlyadded.map((data) => (
+              <Link
+                style={{ color: "black", textDecoration: "none" }}
+                to={`/productReview/${encryptIt(data._id)}`}
+              >
+                <div>
+                  <Card
+                    id="card-product"
+                    // className="shadow-lg m-2 p-3 "
+                    style={{
+                      width: "275px",
+                      cursor: "pointer",
+                      height: "55vh",
+                      borderRadius: "1.5rem",
+                      marginBottom: "50px",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <div className="main_page-card">
+                      <Card.Img
+                        className="product-card-img"
+                        style={{
+                          height: "30vh",
+                          width: "100%",
+                          objectFit: "cover",
+                        }}
+                        variant="top"
+                        src={`${configData.apiurl}/uploads/${data.imageId}`}
+                      />
+                      <Card.Img
+                        className="product-card-img2"
+                        style={{
+                          height: "100%",
+                          objectFit: "contain",
+                          zIndex: "101",
+                          position: "relative",
+                        }}
+                        variant="top"
+                        src={`${configData.apiurl}/uploads/${data.imageId}`}
+                      />
+                    </div>
+                    <Card.Body
+                      className="product-card-body"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-around",
+                        // marginTop: "1rem",
+                        height: "20vh",
+                        width: "100%",
+                      }}
+                    >
+                      <Card.Title>{data.productName}</Card.Title>
+                      <Card.Title>Rs.{data.price}</Card.Title>
+                      <Card.Text>{data.description.slice(0, 40)}...</Card.Text>
+
+                      {/* <Link to="">
+                      <button className="product-card-main">Add to Cart</button>
+                    </Link> */}
+                    </Card.Body>
+                    <BsHeart
+                      size={30}
+                      className="bsheat"
+                      style={{
+                        position: "relative",
+                        zIndex: "1000",
+                        width: "25px",
+                        height: "25px",
+                        top: "-90%",
+                        right: "-88%",
+                      }}
+                      onClick={() => {
+                        handleAdd(data);
+                      }}
+                    />
+                  </Card>
+                </div>
+              </Link>
+            ))}
+        </div>
+        {/* </Slider> */}
+      </div>
+      <span style={{ fontSize: "2.5rem", fontWeight: "bold" }}>
+        Our Products
       </span>
 
       <div
@@ -243,6 +363,7 @@ const ProductsGrid = () => {
         </div>
         {/* </Slider> */}
       </div>
+
     </div>
   );
 };
