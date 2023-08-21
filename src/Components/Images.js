@@ -1,12 +1,13 @@
 import React from "react";
 import Slider from "react-slick";
-import banner from '../Images/newbanner.jpeg'
+import banner from '../Images/banner.jpeg'
 import zIndex from "@mui/material/styles/zIndex";
 export default function Images() {
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
+    
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
