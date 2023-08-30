@@ -7,6 +7,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import { useParams } from "react-router";
 import { FaShare } from "react-icons/fa";
 import ShareModal from "./ShareModal";
+import { useNavigate } from "react-router-dom";
 
 /* Install pure-react-carousel using -> npm i pure-react-carousel */
 
@@ -15,22 +16,25 @@ export default function ProductReview() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
+  const navigate = useNavigate();
+
   // const location = useLocation();
   var { pid } = useParams();
   const bytes = AES.decrypt(pid, "campuskart");
   const id = bytes.toString(enc.Utf8);
   const [data, setData] = useState();
 
+  const myid = localStorage.getItem("id");
+
   useEffect(() => {
     fetch(`${configData.apiurl}/product/get?pid=${id}`)
-    .then((resp) => resp.json())
-    .then((resp) => {
-      setData(resp.data[0]);
-    });
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setData(resp.data[0]);
+      });
   }, []);
 
-  
   const handleAdd = async (_id) => {
     const id = localStorage.getItem("id");
     const body = {
@@ -64,6 +68,30 @@ export default function ProductReview() {
       }
     } else {
       alert("login first to add this in wishlist");
+    }
+  };
+
+  const handleChat = async () => {
+    const body = {
+      senderId: myid,
+      receiverId: data.sellerId,
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+
+    if (auth) {
+      try {
+        const resp = await fetch(`${configData.apiurl}/chat/`, requestOptions);
+        navigate(`/chat/${myid}`);
+      } catch (error) {
+        console.log("error=>", error);
+        alert("error is occurred");
+      }
+    } else {
+      alert("login first to chat");
     }
   };
 
@@ -176,12 +204,18 @@ export default function ProductReview() {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <button className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6">
+                  <button
+                    onClick={() => handleChat()}
+                    className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6"
+                  >
                     Chat Now
                   </button>
-                  <button    onClick={() => {
+                  <button
+                    onClick={() => {
                       handleAdd(data._id);
-                    }} className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48  py-5 lg:mt-12 mt-6">
+                    }}
+                    className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48  py-5 lg:mt-12 mt-6"
+                  >
                     Add To Wishlist
                   </button>
                 </div>

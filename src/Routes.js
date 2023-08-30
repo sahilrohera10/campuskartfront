@@ -18,6 +18,7 @@ import MyProducts from "./Components/MyProducts";
 import Layout from "./Components/Layout";
 import CategoryProductGrid from "./Pages/CategoryProductGrid";
 import ContactUs from "./Components/ContactUs";
+import Chat from "./Components/ChatApp/Chat/Chat";
 
 const routes = [
   {
@@ -34,6 +35,7 @@ const routes = [
       { path: "myProducts", element: <MyProducts /> },
       { path: ":Category", element: <CategoryProductGrid /> },
       { path: "contactUs", element: <ContactUs /> },
+      { path: "chat/:myid", element: <Chat /> },
       { path: "*", element: <PageNotFound /> },
     ],
   },
