@@ -32,6 +32,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.4.0",
+    "react-input-emoji": "^5.1.1",
     "react-loading": "^2.0.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
@@ -39,8 +40,10 @@
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.3",
     "rollbar": "^2.26.2",
+    "socket.io-client": "^4.7.2",
     "swiper": "^10.0.4",
     "tailwindcss": "^3.0.24",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
