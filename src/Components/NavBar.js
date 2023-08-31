@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Avatar from "@mui/material/Avatar";
 import LoginModal from "./LoginModal";
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import "./Navbar.css";
 
 export default function NavBar() {
@@ -238,6 +239,14 @@ export default function NavBar() {
                     strokeLinejoin="round"
                   />
                 </svg>
+              </Link>
+              <Link to="chat/:myid" style={{ color: "black" }}>
+                <div>
+                  <ChatOutlinedIcon
+                    size="25"
+                    style={{ marginRight: "15px", marginTop: "5px" }}
+                  />
+                </div>
               </Link>
               <Link to="contactUs" style={{ color: "black" }}>
                 <div>
