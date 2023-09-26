@@ -13,16 +13,26 @@ import Images from "../Components/Images";
 import ProductsGrid from "./ProductsGrid";
 import Categories from "../Components/Categories";
 import FAQ from "../Components/FAQ";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export default function MainPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const status = useOnlineStatus();
+
+  if (status === false)
+    return (
+      <h2 style={{ marginTop: "140px", textAlign: "center" }}>
+        Looks like you are offline! .. Please check your internet connction.
+      </h2>
+    );
+
   return (
     <div>
       <Images />
-      
+
       <div
         style={{
           display: "flex",
@@ -31,12 +41,10 @@ export default function MainPage() {
           alignItems: "center",
         }}
       >
-        
         <Categories />
         <ProductsGrid />
         {/* <FAQ/> */}
       </div>
-      
 
       <br />
       <br />
