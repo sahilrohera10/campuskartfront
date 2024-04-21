@@ -100,7 +100,7 @@ export default function ProductReview() {
       {data ? (
         <>
           <div
-            style={{ paddingTop: "150px" }}
+            style={{ paddingTop: "150px", width: "90vw", margin: "auto" }}
             className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4 "
           >
             <div className="flex justify-center items-center lg:flex-row flex-col gap-8">
@@ -209,6 +209,12 @@ export default function ProductReview() {
                     className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6"
                   >
                     Chat Now
+                  </button>
+                  <button
+                    // onClick={() => handleChat()}
+                    className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-48 py-5 lg:mt-12 mt-6"
+                  >
+                    Buy Now
                   </button>
                   <button
                     onClick={() => {

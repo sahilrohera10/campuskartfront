@@ -31,7 +31,31 @@ export default function MainPage() {
 
   return (
     <div>
-      <Images />
+      {/* <Images /> */}
+
+      <div className="flex items-center mt-16 justify-center pt-10 h-48 md:h-64 w-full bg-faf7f2">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+              Connect. Trade. Thrive.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 mb-6">
+              Your College's Marketplace to buy and sell items among peers.
+            </p>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              Explore Now
+            </button>
+          </div>
+          {/* <div className="md:w-1/2 flex justify-center mt-4 md:mt-0">
+            <img
+              src="/img.png"
+              alt="Illustration"
+              className="object-cover w-56 h-56 md:w-64 md:h-64 rounded-lg "
+            />
+          </div> */}
+        </div>
+              
+      </div>
 
       <div
         style={{

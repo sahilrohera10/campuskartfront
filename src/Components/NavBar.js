@@ -7,10 +7,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Avatar from "@mui/material/Avatar";
 import LoginModal from "./LoginModal";
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import { FaChevronDown } from "react-icons/fa";
+import { FaBook } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
+import { FaChair } from "react-icons/fa";
+
 import "./Navbar.css";
 
 export default function NavBar() {
+  const [isHovered, setIsHovered] = useState(false);
+
   const auth = localStorage.getItem("isAuthenticated");
   const b = "book";
   const s = "stationery";
@@ -55,7 +62,15 @@ export default function NavBar() {
       className="dark:bg-gray-900"
     >
       <div className="2xl:container 2xl:mx-auto md:py-5 lg:px-20 md:px-6 p-4  navsizing">
-        <div className="flex items-center justify-between">
+        <div
+          style={{
+            marginLeft: "-250px",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+          className="items-center"
+        >
           <div className="lg:w-3/12">
             <button
               onClick={() => setShowMenu(true)}
@@ -95,8 +110,7 @@ export default function NavBar() {
               </svg>
             </button>
           </div>
-          <div className="lg:w-6/12 flex flex-row items-center space-y-3.5 logoDiv">
-            {/* image of campus kart div  */}
+          <div className="w-full justify-between flex flex-row items-center space-y-3.5 logoDiv">
             <Link to="/">
               <div
                 aria-label="Luxiwood. Logo"
@@ -104,7 +118,7 @@ export default function NavBar() {
                 className="cursor-pointer"
               >
                 <img
-                  style={{ width: "190px" }}
+                  style={{ width: "140px" }}
                   src="Campus Kart Logo.png"
                   alt=""
                 />
@@ -112,97 +126,117 @@ export default function NavBar() {
             </Link>
             <div
               style={{
-                // marginLeft: "300px",
-                width: "1760px",
-                marginRight: "-750px",
-                // height: "100px",
-                fontFamily: "cursive",
+                width: "316px",
               }}
-              className="hidden lg:block"
             >
               <ul
-                style={{ width: "550px" }}
+                style={{ width: "310px" }}
                 className="flex items-center space-x-10"
               >
-                <li className="navitem">
-                  <Link
-                    to=""
-                    style={{ textDecoration: "none" }}
-                    className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <p style={{ fontSize: "20px", marginBottom: "0px" }}>
-                      Home
-                    </p>
+                <li>
+                  <Link to="" style={{ textDecoration: "none" }}>
+                    <p className="nav-content">Home</p>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to={`${b}`}
-                    style={{ textDecoration: "none" }}
-                    className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
+                  <p
+                    className="nav-content flex cursor-pointer"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                   >
-                    <p style={{ fontSize: "20px", marginBottom: "0px" }}>
-                      Books
-                    </p>
-                  </Link>
+                    Categories{" "}
+                    <FaChevronDown
+                      size={12}
+                      style={{ marginTop: "8px", marginLeft: "4" }}
+                    />
+                  </p>
                 </li>
 
-                <li>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={`${s}`}
-                    className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <p style={{ fontSize: "20px", marginBottom: "0px" }}>
-                      {" "}
-                      {/* Become a Seller{" "} */}
-                      Stationery
-                    </p>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={`${e}`}
-                    className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <p style={{ fontSize: "20px", marginBottom: "0px" }}>
-                      {" "}
-                      Electronics
-                    </p>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={`${f}`}
-                    className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <p style={{ fontSize: "20px", marginBottom: "0px" }}>
-                      {" "}
-                      Furniture
-                    </p>
-                  </Link>
-                </li>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to="addProduct"
-                  className="dark:text-white dark:hover:text-gray-300 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
+                <div
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  className="cat_drop"
+                  style={{
+                    backdropFilter:
+                      "blur(7px)" /* Adjust the blur strength as needed */,
+                    width: "70%",
+                    background: "#d9dde67d",
+                    height: "20vh",
+                    position: "absolute",
+                    top: "80%",
+                    left: "12%",
+                    borderRadius: "20px",
+                    display: isHovered ? "block" : "none", // Toggle display based on hover state
+                  }}
                 >
+                  <div className="flex w-full justify-between p-14 pl-20 pr-20">
+                    <Link to={`${b}`} style={{ textDecoration: "none" }}>
+                      <div className="flex">
+                        {/* icon */}
+                        <FaBook
+                          size={20}
+                          color="black"
+                          style={{ marginTop: "5px" }}
+                        />
+
+                        <p
+                          className="nav-content"
+                          style={{ fontSize: "20px", marginLeft: "5px" }}
+                        >
+                          Books
+                        </p>
+                      </div>{" "}
+                    </Link>
+                    <Link to={`${s}`} style={{ textDecoration: "none" }}>
+                      <div className="flex">
+                        {/* icon */}
+                        <FaPencilAlt
+                          size={20}
+                          color="black"
+                          style={{ marginTop: "5px" }}
+                        />
+
+                        <p
+                          className="nav-content"
+                          style={{ fontSize: "20px", marginLeft: "5px" }}
+                        >
+                          Stationery
+                        </p>
+                      </div>
+                    </Link>
+                    <Link to={`${f}`} style={{ textDecoration: "none" }}>
+                      <div className="flex">
+                        {/* icon */}
+                        <FaChair
+                          size={20}
+                          color="black"
+                          style={{ marginTop: "5px" }}
+                        />
+
+                        <p
+                          className="nav-content"
+                          style={{ fontSize: "20px", marginLeft: "5px" }}
+                        >
+                          Furniture
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                <Link style={{ textDecoration: "none" }} to="addProduct">
                   <button
                     style={{
-                      width: "80px",
+                      width: "60px",
+                      padding: "5px",
                       color: "black",
-                      // borderImage:
-                      //   "linear-gradient(to right, green, lightgreen)",
                       borderRadius: "20px",
                       borderLeft: "5px solid green",
                       borderTop: "5px solid #FBCC06",
                       borderRight: "5px solid green",
                       borderBottom: "5px solid #FBCC06",
-
                       backgroundColor: "white",
+                      fontSize: "15px",
                     }}
                   >
                     SELL
@@ -259,15 +293,6 @@ export default function NavBar() {
               <div>
                 <div className="dropdown">
                   <button className="dropbtn">
-                    {/* <CgProfile
-                      color="black"
-                      size={25}
-                      style={{
-                        marginRight: "25px",
-                        marginTop: "1px",
-                        cursor: "pointer",
-                      }}
-                    /> */}
                     <Avatar
                       sx={{ width: 30, height: 30 }}
                       style={{
@@ -528,7 +553,6 @@ export default function NavBar() {
             </ul>
           </div>
         </div>
-        {/* Main Menu */}
         <div
           id="mobile-menu"
           className={`${
